@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "984669881916",
+    "project_id": "pasticceria-simlimone",
+    "storage_bucket": "pasticceria-simlimone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984669881916:android:82ab837c9cbf1a7b072539",
+        "android_client_info": {
+          "package_name": "it.simlimone.pasticceria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984669881916-dficrb3ijvfu1p46i56e1o9i5utpkv0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-aISLYh0N6-Vv5BJ95PbTXcOQSJLigfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984669881916-dficrb3ijvfu1p46i56e1o9i5utpkv0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
