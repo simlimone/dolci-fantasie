@@ -60,7 +60,7 @@ class RootPage extends StatelessWidget {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.ellipsis_circle),
-        title: ("More"),
+        title: ("Altro"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

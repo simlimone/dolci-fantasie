@@ -7,6 +7,7 @@ class Candy {
   String? name;
   List<String>? images;
   String? description;
+  String? price;
   int? categoryNumber;
 
   Candy({
@@ -14,6 +15,7 @@ class Candy {
     this.name,
     this.images,
     this.description,
+    this.price,
     this.categoryNumber,
   });
 
@@ -22,6 +24,7 @@ class Candy {
     String? name,
     List<String>? images,
     String? description,
+    String? price,
     int? categoryNumber,
   }) {
     return Candy(
@@ -29,6 +32,7 @@ class Candy {
       name: name ?? this.name,
       images: images ?? this.images,
       description: description ?? this.description,
+      price: price ?? this.price,
       categoryNumber: categoryNumber ?? this.categoryNumber,
     );
   }
@@ -39,6 +43,7 @@ class Candy {
       'name': name,
       'images': images,
       'description': description,
+      'price': price,
       'categoryNumber': categoryNumber,
     };
   }
@@ -49,6 +54,7 @@ class Candy {
       name: map['name'],
       images: List<String>.from(map['images']),
       description: map['description'],
+      price: map['price'],
       categoryNumber: map['categoryNumber']?.toInt(),
     );
   }
@@ -59,7 +65,7 @@ class Candy {
 
   @override
   String toString() {
-    return 'Candy(id: $id, name: $name, images: $images, description: $description, categoryNumber: $categoryNumber)';
+    return 'Candy(id: $id, name: $name, images: $images, description: $description, price: $price, categoryNumber: $categoryNumber)';
   }
 
   @override
@@ -71,6 +77,7 @@ class Candy {
         other.name == name &&
         listEquals(other.images, images) &&
         other.description == description &&
+        other.price == price &&
         other.categoryNumber == categoryNumber;
   }
 
@@ -80,6 +87,7 @@ class Candy {
         name.hashCode ^
         images.hashCode ^
         description.hashCode ^
+        price.hashCode ^
         categoryNumber.hashCode;
   }
 }

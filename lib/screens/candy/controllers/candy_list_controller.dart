@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/candy.dart';
@@ -38,7 +37,7 @@ class CandyListController extends GetxController {
         (categories.get('list') as List<dynamic>).indexOf(category);
 
     var docsFoundByCategory = await Strings.candyCollection
-        .where('category', isEqualTo: categoryNumber)
+        .where('categoryNumber', isEqualTo: categoryNumber)
         .get();
 
     returnList

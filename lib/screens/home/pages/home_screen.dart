@@ -9,22 +9,24 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<HomeController>(
-        builder: (controller) => ListView.builder(
-          itemCount: controller.categories.length,
-          scrollDirection: Axis.vertical,
-          itemExtent: 170,
-          itemBuilder: (context, index) {
-            var category = controller.categories[index];
+      body: SafeArea(
+        child: GetBuilder<HomeController>(
+          builder: (controller) => ListView.builder(
+            itemCount: controller.categories.length,
+            scrollDirection: Axis.vertical,
+            itemExtent: 170,
+            itemBuilder: (context, index) {
+              var category = controller.categories[index];
 
-            if (category.name == null || category.image == null) {
-              return const SizedBox(height: 0, width: 0);
-            }
+              if (category.name == null || category.image == null) {
+                return const SizedBox(height: 0, width: 0);
+              }
 
-            return CategoryWidget(
-              category: category,
-            );
-          },
+              return CategoryWidget(
+                category: category,
+              );
+            },
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/candy.dart';
 import 'package:pasticceria/screens/candy/controllers/candy_list_controller.dart';
 import 'package:pasticceria/widgets/candy_widget.dart';
@@ -11,6 +12,12 @@ class CandyListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          Get.arguments['category'],
+          style: TextStyles.candyListTitle,
+        ),
+      ),
       body: GetBuilder<CandyListController>(
         builder: (controller) => GridView.builder(
           gridDelegate: SliverWovenGridDelegate.count(
