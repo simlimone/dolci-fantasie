@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/candy.dart';
@@ -14,31 +13,26 @@ class CandyListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          Get.arguments['category'],
+          Get.arguments?['category'] ?? 'Riavvia l\'app',
           style: TextStyles.candyListTitle,
         ),
       ),
       body: GetBuilder<CandyListController>(
         builder: (controller) => GridView.builder(
-          gridDelegate: SliverWovenGridDelegate.count(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
-            pattern: [
-              const WovenGridTile(1),
-              const WovenGridTile(
-                5 / 7,
-                crossAxisRatio: 0.9,
-                alignment: AlignmentDirectional.centerEnd,
-              ),
-            ],
+            mainAxisExtent: 300,
           ),
           scrollDirection: Axis.vertical,
           itemCount: controller.candyList.length,
           itemBuilder: (context, index) {
             Candy candy = controller.candyList[index];
 
-            return CandyWidget(candy: candy);
+            bool even = index.floor().isEven;
+
+            return CandyWidget(candy: candy, even: even);
           },
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:pasticceria/bindings/home_binding.dart';
 import 'package:pasticceria/screens/about-us/about_page.dart';
 import 'package:pasticceria/screens/auth/login_page.dart';
 import 'package:pasticceria/screens/candy/candy_list.dart';
+import 'package:pasticceria/screens/candy/details/candy_detail.dart';
 import 'package:pasticceria/screens/home/rootpage.dart';
 
 class Routes {
@@ -24,6 +25,10 @@ class Routes {
       name: '/candy-list',
       page: () => const CandyListPage(),
       binding: CandyListBinding(),
+    ),
+    GetPage(
+      name: '/candy-detail',
+      page: () => const CandyDetailPage(),
     ),
     GetPage(
       name: '/about-us',

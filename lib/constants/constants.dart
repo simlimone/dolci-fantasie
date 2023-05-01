@@ -50,17 +50,29 @@ class TextStyles {
 }
 
 class DefaultBorders {
-  static final candyContainer = BorderRadius.circular(20);
+  static final candyContainer = BorderRadius.circular(35);
   static const candySheet = BorderRadius.only(
-    topLeft: Radius.circular(20),
-    topRight: Radius.circular(20),
+    bottomLeft: Radius.circular(20),
+    bottomRight: Radius.circular(20),
   );
 }
 
 class BestPaddings {
   static const categoryContainer = EdgeInsets.all(15);
-  static const candyContainerExt = EdgeInsets.all(5);
-  static const candyContainerInt = EdgeInsets.all(5);
+  static const backButton = EdgeInsets.all(6);
+  static candyContainerExt({bool right = false, bool left = false}) =>
+      EdgeInsets.only(
+        left: left ? 15 : 5,
+        right: right ? 15 : 5,
+        top: 5,
+        bottom: 5,
+      );
+  static const candyContainerInt = EdgeInsets.only(
+    left: 15,
+    top: 5,
+    bottom: 5,
+    right: 5,
+  );
   static const candyDescription = EdgeInsets.only(
     left: 25,
     right: 25,

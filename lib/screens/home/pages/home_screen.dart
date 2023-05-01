@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pasticceria/screens/auth/controllers/auth_controller.dart';
 import 'package:pasticceria/screens/home/controllers/home_controller.dart';
 import 'package:pasticceria/widgets/category_widget.dart';
 
@@ -9,6 +10,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          GetX<AuthController>(
+            builder: (controller) {
+              if (controller.firebaseUser.value != null &&
+                  controller.firestoreUser.value != null &&
+                  controller.firestoreUser.value!.isAdmin != null &&
+                  controller.firestoreUser.value!.isAdmin!) {
+                return IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () => Get.toNamed('/new-category'),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: GetBuilder<HomeController>(
           builder: (controller) => ListView.builder(

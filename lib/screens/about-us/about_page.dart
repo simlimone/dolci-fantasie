@@ -26,7 +26,10 @@ class AboutUsPage extends StatelessWidget {
                         imageUrl: e,
                       ))
                   .toList(),
-              options: CarouselOptions(height: 300),
+              options: CarouselOptions(
+                height: 300,
+                enlargeCenterPage: true,
+              ),
             ),
             if (controller.about.value?.description != null)
               const Padding(
