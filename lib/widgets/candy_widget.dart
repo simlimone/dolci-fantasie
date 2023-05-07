@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +19,9 @@ class CandyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String tag = (candy.images?.first ?? StaticImages.defaultCandy) +
+        Random().nextInt(1000).toString();
+
     return Container(
       height: 300,
       margin: even
@@ -26,21 +31,25 @@ class CandyWidget extends StatelessWidget {
         borderRadius: DefaultBorders.candyContainer,
         onTap: () => Get.toNamed(
           '/candy-detail',
-          arguments: candy,
+          arguments: candy.copyWith(tag: tag),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
-              child: Material(
-                elevation: 4,
-                borderRadius: DefaultBorders.candyContainer,
-                child: ClipRRect(
+              child: Hero(
+                tag: tag,
+                child: Material(
+                  elevation: 4,
                   borderRadius: DefaultBorders.candyContainer,
-                  child: CachedNetworkImage(
-                    imageUrl: candy.images?.first ?? StaticImages.defaultCandy,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: DefaultBorders.candyContainer,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          candy.images?.first ?? StaticImages.defaultCandy,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

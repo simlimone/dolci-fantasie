@@ -3,23 +3,23 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class About {
-  String? name;
+  String? title;
   String? description;
   List<String>? images;
 
   About({
-    this.name,
+    this.title,
     this.description,
     this.images,
   });
 
   About copyWith({
-    String? name,
+    String? title,
     String? description,
     List<String>? images,
   }) {
     return About(
-      name: name ?? this.name,
+      title: title ?? this.title,
       description: description ?? this.description,
       images: images ?? this.images,
     );
@@ -27,7 +27,7 @@ class About {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
+      'title': title,
       'description': description,
       'images': images,
     };
@@ -35,7 +35,7 @@ class About {
 
   factory About.fromMap(Map<String, dynamic> map) {
     return About(
-      name: map['name'],
+      title: map['title'],
       description: map['description'],
       images: List<String>.from(map['images']),
     );
@@ -47,18 +47,18 @@ class About {
 
   @override
   String toString() =>
-      'About(name: $name, description: $description, images: $images)';
+      'About(title: $title, description: $description, images: $images)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is About &&
-        other.name == name &&
+        other.title == title &&
         other.description == description &&
         listEquals(other.images, images);
   }
 
   @override
-  int get hashCode => name.hashCode ^ description.hashCode ^ images.hashCode;
+  int get hashCode => title.hashCode ^ description.hashCode ^ images.hashCode;
 }

@@ -20,25 +20,30 @@ class TextStyles {
 
   static const candyListLabel = TextStyle(
     fontSize: 20,
-    color: Colors.black87,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
   );
 
   static const candyDetailTitle = TextStyle(
     fontSize: 30,
-    color: Colors.black87,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
   );
 
   static const candyDescriptionLabel = TextStyle(
     fontSize: 21,
-    color: Colors.black87,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
   );
 
   static const candyDescription = TextStyle(
     fontSize: 20,
-    color: Colors.black87,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
+  );
+  static const candyHint = TextStyle(
+    fontSize: 14,
+    color: Colors.grey,
     fontWeight: FontWeight.normal,
   );
 

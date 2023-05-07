@@ -9,6 +9,7 @@ class Candy {
   String? description;
   String? price;
   int? categoryNumber;
+  String? tag;
 
   Candy({
     this.id,
@@ -17,6 +18,7 @@ class Candy {
     this.description,
     this.price,
     this.categoryNumber,
+    this.tag,
   });
 
   Candy copyWith({
@@ -26,6 +28,7 @@ class Candy {
     String? description,
     String? price,
     int? categoryNumber,
+    String? tag,
   }) {
     return Candy(
       id: id ?? this.id,
@@ -34,6 +37,7 @@ class Candy {
       description: description ?? this.description,
       price: price ?? this.price,
       categoryNumber: categoryNumber ?? this.categoryNumber,
+      tag: tag ?? this.tag,
     );
   }
 
@@ -65,7 +69,7 @@ class Candy {
 
   @override
   String toString() {
-    return 'Candy(id: $id, name: $name, images: $images, description: $description, price: $price, categoryNumber: $categoryNumber)';
+    return 'Candy(id: $id, name: $name, images: $images, description: $description, price: $price, categoryNumber: $categoryNumber, tag: $tag)';
   }
 
   @override
@@ -78,7 +82,8 @@ class Candy {
         listEquals(other.images, images) &&
         other.description == description &&
         other.price == price &&
-        other.categoryNumber == categoryNumber;
+        other.categoryNumber == categoryNumber &&
+        other.tag == tag;
   }
 
   @override
@@ -88,6 +93,7 @@ class Candy {
         images.hashCode ^
         description.hashCode ^
         price.hashCode ^
-        categoryNumber.hashCode;
+        categoryNumber.hashCode ^
+        tag.hashCode;
   }
 }

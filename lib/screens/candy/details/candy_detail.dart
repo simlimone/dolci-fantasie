@@ -15,6 +15,8 @@ class CandyDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Candy candy = Get.arguments;
 
+    CarouselController carouselController = CarouselController();
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -38,22 +40,44 @@ class CandyDetailPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          ClipRRect(
-            borderRadius: DefaultBorders.candySheet,
-            child: CarouselSlider(
-              items: candy.images
-                  ?.map(
-                    (e) => CachedNetworkImage(
-                      imageUrl: e,
-                      fit: BoxFit.cover,
+          Hero(
+            tag: candy.tag ?? '',
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ClipRRect(
+                    borderRadius: DefaultBorders.candySheet,
+                    child: CarouselSlider(
+                      carouselController: carouselController,
+                      items: candy.images
+                          ?.map(
+                            (e) => CachedNetworkImage(
+                              imageUrl: e,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                          .toList(),
+                      options: CarouselOptions(
+                        height: Get.size.height / 2,
+                        viewportFraction: 1,
+                        scrollDirection: Axis.horizontal,
+                      ),
                     ),
-                  )
-                  .toList(),
-              options: CarouselOptions(
-                height: Get.size.height / 2,
-                viewportFraction: 1,
-                scrollDirection: Axis.horizontal,
-              ),
+                  ),
+                ),
+                const Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 15.0),
+                    child: Text(
+                      "Scorri per vedere le altre immagini",
+                      style: TextStyles.candyHint,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
           Padding(

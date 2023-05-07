@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:pasticceria/screens/home/pages/home_screen.dart';
 import 'package:pasticceria/screens/home/pages/more_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -13,17 +12,21 @@ class RootPage extends StatelessWidget {
       context,
       screens: _buildScreens(),
       items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      confineInSafeArea: false,
+      backgroundColor:
+          const Color.fromARGB(255, 25, 22, 29), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+      decoration: const NavBarDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10),
+        ),
+        colorBehindNavBar: Color(0xff1F1B24),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
@@ -55,13 +58,13 @@ class RootPage extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: CupertinoColors.white,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.ellipsis_circle),
         title: ("Altro"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: CupertinoColors.white,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];

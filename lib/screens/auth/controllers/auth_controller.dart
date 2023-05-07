@@ -24,6 +24,8 @@ class AuthController extends GetxController {
     ever(firebaseUser, _setNewFirestoreStream);
   }
 
+  bool get isLogged => _auth.currentUser != null;
+
   _setNewFirestoreStream(User? firebaseUser) {
     firestoreUser.bindStream(streamFirestoreUser(firebaseUser));
   }

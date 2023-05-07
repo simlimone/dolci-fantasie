@@ -12,20 +12,29 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AboutUsController>(
       builder: (controller) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            controller.about.value?.name ?? 'Dolci Fantasie',
-            style: TextStyles.candyDetailTitle,
-          ),
-        ),
+        appBar: controller.about.value?.title != null
+            ? AppBar(
+                title: Text(
+                  controller.about.value?.title ?? 'Dolci Fantasie',
+                  style: TextStyles.candyDetailTitle,
+                ),
+              )
+            : AppBar(
+                title: Image.asset(
+                  'assets/logo/fantasie-256.png',
+                  color: Colors.white,
+                  height: 100,
+                ),
+              ),
         body: ListView(
           children: [
             CarouselSlider(
               items: controller.about.value?.images
-                  ?.map((e) => CachedNetworkImage(
-                        imageUrl: e,
-                      ))
-                  .toList(),
+                      ?.map((e) => CachedNetworkImage(
+                            imageUrl: e,
+                          ))
+                      .toList() ??
+                  [],
               options: CarouselOptions(
                 height: 300,
                 enlargeCenterPage: true,
