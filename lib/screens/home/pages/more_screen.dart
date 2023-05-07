@@ -9,17 +9,18 @@ class MoreScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/logo/fantasie-256.png',
-          color: Colors.white,
-          height: 100,
-        ),
-      ),
       body: SafeArea(
         child: Obx(
           () => ListView(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Image.asset(
+                  'assets/logo/fantasie-512.png',
+                  color: Colors.white,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               controller.firebaseUser.value != null
                   ? ListTile(
                       leading: const Icon(Icons.logout_rounded),

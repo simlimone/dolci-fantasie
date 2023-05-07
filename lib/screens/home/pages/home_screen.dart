@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           builder: (controller) => ListView.builder(
             itemCount: controller.categories.length,
             scrollDirection: Axis.vertical,
-            itemExtent: 170,
+            itemExtent: 150,
             itemBuilder: (context, index) {
               var category = controller.categories[index];
 

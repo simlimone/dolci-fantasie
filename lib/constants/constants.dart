@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class Strings {
@@ -9,11 +10,15 @@ class Strings {
       FirebaseFirestore.instance.collection('settings');
   static final usersCollection = FirebaseFirestore.instance.collection('users');
   static final candyCollection = FirebaseFirestore.instance.collection('candy');
+
+  // Firebase Storage
+  static final categoriesFolder =
+      FirebaseStorage.instance.ref().child('categories');
 }
 
 class TextStyles {
   static const categoryLabel = TextStyle(
-    fontSize: 30,
+    fontSize: 25,
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
@@ -56,6 +61,13 @@ class TextStyles {
 
 class DefaultBorders {
   static final candyContainer = BorderRadius.circular(35);
+  static final categoryContainer = BorderRadius.circular(8);
+  static const categoryImage = BorderRadius.only(
+    topLeft: Radius.circular(8),
+    bottomLeft: Radius.circular(8),
+    topRight: Radius.circular(0),
+    bottomRight: Radius.circular(0),
+  );
   static const candySheet = BorderRadius.only(
     bottomLeft: Radius.circular(20),
     bottomRight: Radius.circular(20),
@@ -63,7 +75,11 @@ class DefaultBorders {
 }
 
 class BestPaddings {
-  static const categoryContainer = EdgeInsets.all(15);
+  static const categoryContainer = EdgeInsets.symmetric(
+    horizontal: 15,
+    vertical: 5,
+  );
+  static const categoryContainerInt = EdgeInsets.only(right: 5);
   static const backButton = EdgeInsets.all(6);
   static candyContainerExt({bool right = false, bool left = false}) =>
       EdgeInsets.only(
