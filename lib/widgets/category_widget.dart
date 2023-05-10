@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/category.dart';
-import 'package:pasticceria/screens/categories/controllers/categories_controller.dart';
+import 'package:pasticceria/screens/admin/categories/controllers/categories_controller.dart';
 
 class CategoryWidget extends GetView<CategoriesController> {
   final Category category;

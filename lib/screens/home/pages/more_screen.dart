@@ -43,6 +43,13 @@ class MoreScreen extends GetView<AuthController> {
                   onTap: () => Get.toNamed('/categories'),
                 ),
               if (controller.firebaseUser.value != null) const Divider(),
+              if (controller.firebaseUser.value != null)
+                ListTile(
+                  leading: const Icon(CupertinoIcons.add_circled),
+                  title: const Text("Gestisci Dolci"),
+                  onTap: () => Get.toNamed('/candies'),
+                ),
+              if (controller.firebaseUser.value != null) const Divider(),
               ListTile(
                 leading: const Icon(CupertinoIcons.question_circle),
                 title: const Text("CHI SIAMO"),

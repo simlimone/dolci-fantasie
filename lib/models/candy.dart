@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class Candy {
   String? id;
   String? name;
-  List<String>? images;
+  List<String?>? images;
   String? description;
   String? price;
   int? categoryNumber;
@@ -24,7 +24,7 @@ class Candy {
   Candy copyWith({
     String? id,
     String? name,
-    List<String>? images,
+    List<String?>? images,
     String? description,
     String? price,
     int? categoryNumber,
@@ -56,7 +56,7 @@ class Candy {
     return Candy(
       id: map['id'],
       name: map['name'],
-      images: List<String>.from(map['images']),
+      images: List<String?>.from(map['images']),
       description: map['description'],
       price: map['price'],
       categoryNumber: map['categoryNumber']?.toInt(),

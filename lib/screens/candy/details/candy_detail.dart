@@ -53,10 +53,12 @@ class CandyDetailPage extends StatelessWidget {
                       carouselController: carouselController,
                       items: candy.images
                           ?.map(
-                            (e) => CachedNetworkImage(
-                              imageUrl: e,
-                              fit: BoxFit.cover,
-                            ),
+                            (e) => e != null
+                                ? CachedNetworkImage(
+                                    imageUrl: e,
+                                    fit: BoxFit.cover,
+                                  )
+                                : const Icon(Icons.error),
                           )
                           .toList(),
                       options: CarouselOptions(
