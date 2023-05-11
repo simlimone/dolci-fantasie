@@ -14,6 +14,7 @@ class Strings {
   // Firebase Storage
   static final categoriesFolder =
       FirebaseStorage.instance.ref().child('categories');
+  static final candiesFolder = FirebaseStorage.instance.ref().child('candies');
 }
 
 class TextStyles {

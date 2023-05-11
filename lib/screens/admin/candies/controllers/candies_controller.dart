@@ -44,7 +44,7 @@ class CandiesController extends GetxController {
   Future<void> createNewCandy() async {
     await Fluttertoast.cancel();
     Fluttertoast.showToast(
-      msg: "Scegli l'immagine",
+      msg: "Scegli le immagini",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
@@ -159,10 +159,10 @@ class CandiesController extends GetxController {
     initialSetup();
   }
 
-  Future<bool?> confirmCategoryDeletion() async {
+  Future<bool?> confirmCandyDeletion() async {
     var dialog = await Get.dialog(AlertDialog(
       title: const Text("Sei sicuro?"),
-      content: const Text("Vuoi davvero eliminare questa categoria?"),
+      content: const Text("Vuoi davvero eliminare questo dolce?"),
       actions: [
         TextButton(
           child: const Text("SI"),

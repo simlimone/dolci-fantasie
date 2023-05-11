@@ -40,7 +40,11 @@ class CategoriesController extends GetxController {
       List<dynamic> namesList = doc.data()?['list'];
       int index = namesList.indexOf(name);
 
-      returnList.add(Category(name: name, image: doc.data()?['images'][index]));
+      returnList.add(Category(
+        name: name,
+        image: doc.data()?['images'][index],
+        categoryNumber: index,
+      ));
     }
 
     return returnList;

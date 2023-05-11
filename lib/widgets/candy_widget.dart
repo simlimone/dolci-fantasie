@@ -10,11 +10,13 @@ import 'package:pasticceria/models/candy.dart';
 class CandyWidget extends StatelessWidget {
   final Candy candy;
   final bool even;
+  final bool editMode;
 
   const CandyWidget({
     Key? key,
     required this.candy,
     required this.even,
+    this.editMode = false,
   }) : super(key: key);
 
   @override
@@ -29,10 +31,15 @@ class CandyWidget extends StatelessWidget {
           : BestPaddings.candyContainerExt(right: true),
       child: InkWell(
         borderRadius: DefaultBorders.candyContainer,
-        onTap: () => Get.toNamed(
-          '/candy-detail',
-          arguments: candy.copyWith(tag: tag),
-        ),
+        onTap: () => editMode
+            ? Get.toNamed(
+                '/edit-candy-detail',
+                arguments: candy.copyWith(tag: tag),
+              )
+            : Get.toNamed(
+                '/candy-detail',
+                arguments: candy.copyWith(tag: tag),
+              ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,

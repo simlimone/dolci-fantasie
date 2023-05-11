@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pasticceria/models/candy.dart';
 import 'package:pasticceria/screens/admin/candies/controllers/candies_controller.dart';
 import 'package:pasticceria/widgets/candy_widget.dart';
-import 'package:pasticceria/widgets/category_widget.dart';
 
 class CandiesPage extends StatelessWidget {
   const CandiesPage({super.key});
@@ -50,7 +49,7 @@ class CandiesPage extends StatelessWidget {
                   ),
                 ),
                 confirmDismiss: (direction) async {
-                  return await controller.confirmCategoryDeletion();
+                  return await controller.confirmCandyDeletion();
                 },
                 onDismissed: (direction) async {
                   await controller.deleteCandy(candy);
@@ -58,6 +57,7 @@ class CandiesPage extends StatelessWidget {
                 child: CandyWidget(
                   candy: candy,
                   even: false,
+                  editMode: true,
                 ),
               );
             },

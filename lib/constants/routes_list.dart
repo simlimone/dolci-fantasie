@@ -4,9 +4,11 @@ import 'package:pasticceria/bindings/auth_binding.dart';
 import 'package:pasticceria/bindings/candies_binding.dart';
 import 'package:pasticceria/bindings/candy_list_binding.dart';
 import 'package:pasticceria/bindings/categories_binding.dart';
+import 'package:pasticceria/bindings/edit_candy_detail_binding.dart';
 import 'package:pasticceria/bindings/home_binding.dart';
 import 'package:pasticceria/screens/about-us/about_page.dart';
 import 'package:pasticceria/screens/admin/candies/candies_page.dart';
+import 'package:pasticceria/screens/admin/candies/edit-candy/edit_candy_detail_page.dart';
 import 'package:pasticceria/screens/auth/login_page.dart';
 import 'package:pasticceria/screens/candy/candy_list.dart';
 import 'package:pasticceria/screens/candy/details/candy_detail.dart';
@@ -33,6 +35,11 @@ class Routes {
     GetPage(
       name: '/candy-detail',
       page: () => const CandyDetailPage(),
+    ),
+    GetPage(
+      name: '/edit-candy-detail',
+      page: () => const EditCandyDetailPage(),
+      binding: EditCandyDetailBinding(),
     ),
     GetPage(
       name: '/about-us',

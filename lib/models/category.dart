@@ -3,19 +3,23 @@ import 'dart:convert';
 class Category {
   String? name;
   String? image;
+  int? categoryNumber;
 
   Category({
     this.name,
     this.image,
+    this.categoryNumber,
   });
 
   Category copyWith({
     String? name,
     String? image,
+    int? categoryNumber,
   }) {
     return Category(
       name: name ?? this.name,
       image: image ?? this.image,
+      categoryNumber: categoryNumber ?? this.categoryNumber,
     );
   }
 
@@ -39,15 +43,19 @@ class Category {
       Category.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Category(name: $name, image: $image)';
+  String toString() =>
+      'Category(name: $name, image: $image, categoryNumber: $categoryNumber)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Category && other.name == name && other.image == image;
+    return other is Category &&
+        other.name == name &&
+        other.image == image &&
+        other.categoryNumber == categoryNumber;
   }
 
   @override
-  int get hashCode => name.hashCode ^ image.hashCode;
+  int get hashCode => name.hashCode ^ image.hashCode ^ categoryNumber.hashCode;
 }
