@@ -28,17 +28,55 @@ class AboutUsPage extends StatelessWidget {
               ),
         body: ListView(
           children: [
-            CarouselSlider(
-              items: controller.about.value?.images
-                      ?.map((e) => CachedNetworkImage(
-                            imageUrl: e,
-                          ))
-                      .toList() ??
-                  [],
-              options: CarouselOptions(
-                height: 300,
-                enlargeCenterPage: true,
-              ),
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                CarouselSlider(
+                  items: controller.about.value?.images
+                          ?.map((e) => CachedNetworkImage(
+                                imageUrl: e,
+                              ))
+                          .toList() ??
+                      [],
+                  options: CarouselOptions(
+                    height: 300,
+                    enlargeCenterPage: true,
+                    onPageChanged: (index, reason) =>
+                        controller.carouselIndex.value = index,
+                  ),
+                ),
+                if (controller.firebaseUser.value != null)
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: MaterialButton(
+                      shape: const CircleBorder(),
+                      padding: BestPaddings.backButton,
+                      textColor: Colors.red,
+                      color: Colors.white,
+                      child: const Icon(
+                        Icons.delete_forever,
+                        size: 18,
+                      ),
+                      onPressed: () async => await controller
+                          .deleteImage(controller.carouselIndex.value),
+                    ),
+                  ),
+                if (controller.firebaseUser.value != null)
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: MaterialButton(
+                      shape: const CircleBorder(),
+                      padding: BestPaddings.backButton,
+                      textColor: Colors.blue[300],
+                      color: Colors.white,
+                      child: const Icon(
+                        Icons.add_a_photo,
+                        size: 18,
+                      ),
+                      onPressed: () async => await controller.addPicture(),
+                    ),
+                  ),
+              ],
             ),
             if (controller.about.value?.description != null)
               const Padding(
@@ -48,10 +86,25 @@ class AboutUsPage extends StatelessWidget {
                   style: TextStyles.candyDescriptionLabel,
                 ),
               ),
-            if (controller.about.value?.description != null)
+            controller.firebaseUser.value != null
+                ? Padding(
+                    padding: BestPaddings.candyDescription,
+                    child: TextField(
+                      controller: controller.descriptionController,
+                      maxLines: null,
+                    ),
+                  )
+                : Padding(
+                    padding: BestPaddings.candyDescription,
+                    child: Text(controller.about.value!.description!),
+                  ),
+            if (controller.firebaseUser.value != null)
               Padding(
                 padding: BestPaddings.candyDescription,
-                child: Text(controller.about.value!.description!),
+                child: ElevatedButton(
+                  child: const Text("Salva Descrizione"),
+                  onPressed: () async => await controller.saveDescription(),
+                ),
               ),
           ],
         ),

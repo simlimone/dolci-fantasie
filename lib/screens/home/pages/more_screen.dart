@@ -56,14 +56,16 @@ class MoreScreen extends GetView<AuthController> {
                 onTap: () => Get.toNamed('/about-us'),
               ),
               const Divider(),
-              const ListTile(
-                leading: Icon(CupertinoIcons.doc_richtext),
-                title: Text("Termini di Servizio"),
+              ListTile(
+                leading: const Icon(CupertinoIcons.doc_richtext),
+                title: const Text("Termini di Servizio"),
+                onTap: () => Get.toNamed('/terms', arguments: 'terms'),
               ),
               const Divider(),
-              const ListTile(
-                leading: Icon(CupertinoIcons.doc_richtext),
-                title: Text("Politica sulla Privacy"),
+              ListTile(
+                leading: const Icon(CupertinoIcons.doc_richtext),
+                title: const Text("Politica sulla Privacy"),
+                onTap: () => Get.toNamed('/terms', arguments: 'privacy'),
               ),
             ],
           ),

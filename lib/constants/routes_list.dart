@@ -14,6 +14,7 @@ import 'package:pasticceria/screens/candy/candy_list.dart';
 import 'package:pasticceria/screens/candy/details/candy_detail.dart';
 import 'package:pasticceria/screens/admin/categories/categories_page.dart';
 import 'package:pasticceria/screens/home/rootpage.dart';
+import 'package:pasticceria/screens/terms/terms_privacy_page.dart';
 
 class Routes {
   static final list = [
@@ -55,6 +56,10 @@ class Routes {
       name: '/candies',
       page: () => const CandiesPage(),
       binding: CandiesBinding(),
+    ),
+    GetPage(
+      name: '/terms',
+      page: () => const TermsAndPrivacyPage(),
     ),
   ];
 }

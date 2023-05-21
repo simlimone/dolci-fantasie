@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class Strings {
   static final categoriesDocument = settingsCollection.doc('categories');
   static final aboutDocument = settingsCollection.doc('about-us');
+  static final linksDocument = settingsCollection.doc('links');
 
   static final settingsCollection =
       FirebaseFirestore.instance.collection('settings');
@@ -15,6 +16,7 @@ class Strings {
   static final categoriesFolder =
       FirebaseStorage.instance.ref().child('categories');
   static final candiesFolder = FirebaseStorage.instance.ref().child('candies');
+  static final aboutFolder = FirebaseStorage.instance.ref().child('about');
 }
 
 class TextStyles {
