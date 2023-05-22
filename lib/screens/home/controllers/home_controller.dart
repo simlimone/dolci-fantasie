@@ -20,16 +20,7 @@ class HomeController extends GetxController {
   }
 
   Future<List<Category>> getCategories() async {
-    var doc = await Strings.categoriesDocument.get();
-    List<Category> returnList = [];
-
-    for (var name in doc.data()?['list']) {
-      List<dynamic> namesList = doc.data()?['list'];
-      int index = namesList.indexOf(name);
-
-      returnList.add(Category(name: name, image: doc.data()?['images'][index]));
-    }
-
-    return returnList;
+    var doc = await Strings.categoriesCollection.get();
+    return doc.docs.map((e) => Category.fromMap(e.data())).toList();
   }
 }

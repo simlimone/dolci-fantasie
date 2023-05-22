@@ -1,30 +1,31 @@
 import 'dart:convert';
 
 class Category {
+  String? id;
   String? name;
   String? image;
-  int? categoryNumber;
 
   Category({
+    this.id,
     this.name,
     this.image,
-    this.categoryNumber,
   });
 
   Category copyWith({
+    String? id,
     String? name,
     String? image,
-    int? categoryNumber,
   }) {
     return Category(
+      id: id ?? this.id,
       name: name ?? this.name,
       image: image ?? this.image,
-      categoryNumber: categoryNumber ?? this.categoryNumber,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'image': image,
     };
@@ -32,6 +33,7 @@ class Category {
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
+      id: map['id'],
       name: map['name'],
       image: map['image'],
     );
@@ -43,19 +45,18 @@ class Category {
       Category.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Category(name: $name, image: $image, categoryNumber: $categoryNumber)';
+  String toString() => 'Category(id: $id, name: $name, image: $image)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Category &&
+        other.id == id &&
         other.name == name &&
-        other.image == image &&
-        other.categoryNumber == categoryNumber;
+        other.image == image;
   }
 
   @override
-  int get hashCode => name.hashCode ^ image.hashCode ^ categoryNumber.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ image.hashCode;
 }

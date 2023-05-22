@@ -33,21 +33,9 @@ class CategoriesController extends GetxController {
   }
 
   Future<List<Category>> getCategories() async {
-    var doc = await Strings.categoriesDocument.get();
-    List<Category> returnList = [];
+    var doc = await Strings.categoriesCollection.get();
 
-    for (var name in doc.data()?['list']) {
-      List<dynamic> namesList = doc.data()?['list'];
-      int index = namesList.indexOf(name);
-
-      returnList.add(Category(
-        name: name,
-        image: doc.data()?['images'][index],
-        categoryNumber: index,
-      ));
-    }
-
-    return returnList;
+    return doc.docs.map((e) => Category.fromMap(e.data())).toList();
   }
 
   Future<void> createNewCategory() async {
@@ -78,12 +66,15 @@ class CategoriesController extends GetxController {
     var choosenName = await setCategoryName(null);
 
     if (choosenImage != null && choosenName != null) {
-      await Strings.categoriesDocument.update(
-        {
-          'images': FieldValue.arrayUnion([choosenImage]),
-          'list': FieldValue.arrayUnion([choosenName]),
-        },
-      );
+      var doc = Strings.categoriesCollection.doc();
+
+      await Strings.categoriesCollection.doc(doc.id).set(
+            Category(
+              id: doc.id,
+              image: choosenImage,
+              name: choosenName,
+            ).toMap(),
+          );
 
       initialSetup();
     }
@@ -99,22 +90,9 @@ class CategoriesController extends GetxController {
     String? imageUrl = await uploadImageOnStorage(image);
 
     if (category != null) {
-      List<Category> categories = await getCategories();
-
-      int index = categories.indexOf(category);
-
-      Category newCategory = Category(
-        image: imageUrl,
-        name: category.name,
-      );
-
-      categories.setAll(index, [newCategory]);
-
-      await Strings.categoriesDocument.update(
-        {
-          'images': categories.map((e) => e.image).toList(),
-        },
-      );
+      await Strings.categoriesCollection.doc(category.id).update(
+            category.copyWith(image: imageUrl).toMap(),
+          );
 
       initialSetup();
     }
@@ -147,22 +125,9 @@ class CategoriesController extends GetxController {
     }
 
     if (category != null) {
-      List<Category> categories = await getCategories();
-
-      int index = categories.indexOf(category);
-
-      Category newCategory = Category(
-        image: category.image,
-        name: newName,
-      );
-
-      categories.setAll(index, [newCategory]);
-
-      await Strings.categoriesDocument.update(
-        {
-          'list': categories.map((e) => e.name).toList(),
-        },
-      );
+      await Strings.categoriesCollection.doc(category.id).update(
+            category.copyWith(name: newName).toMap(),
+          );
 
       initialSetup();
     }
@@ -183,12 +148,7 @@ class CategoriesController extends GetxController {
   }
 
   Future<void> deleteCategory(Category category) async {
-    await Strings.categoriesDocument.update(
-      {
-        'images': FieldValue.arrayRemove([category.image]),
-        'list': FieldValue.arrayRemove([category.name]),
-      },
-    );
+    await Strings.categoriesCollection.doc(category.id).delete();
 
     initialSetup();
   }

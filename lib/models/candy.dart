@@ -8,7 +8,7 @@ class Candy {
   List<String?>? images;
   String? description;
   String? price;
-  int? categoryNumber;
+  String? categoryID;
   String? tag;
 
   Candy({
@@ -17,7 +17,7 @@ class Candy {
     this.images,
     this.description,
     this.price,
-    this.categoryNumber,
+    this.categoryID,
     this.tag,
   });
 
@@ -27,7 +27,7 @@ class Candy {
     List<String?>? images,
     String? description,
     String? price,
-    int? categoryNumber,
+    String? categoryID,
     String? tag,
   }) {
     return Candy(
@@ -36,7 +36,7 @@ class Candy {
       images: images ?? this.images,
       description: description ?? this.description,
       price: price ?? this.price,
-      categoryNumber: categoryNumber ?? this.categoryNumber,
+      categoryID: categoryID ?? this.categoryID,
       tag: tag ?? this.tag,
     );
   }
@@ -48,7 +48,8 @@ class Candy {
       'images': images,
       'description': description,
       'price': price,
-      'categoryNumber': categoryNumber,
+      'categoryID': categoryID,
+      'tag': tag,
     };
   }
 
@@ -56,10 +57,11 @@ class Candy {
     return Candy(
       id: map['id'],
       name: map['name'],
-      images: List<String?>.from(map['images']),
+      images: map['images'] != null ? List<String?>.from(map['images']) : null,
       description: map['description'],
       price: map['price'],
-      categoryNumber: map['categoryNumber']?.toInt(),
+      categoryID: map['categoryID'],
+      tag: map['tag'],
     );
   }
 
@@ -69,7 +71,7 @@ class Candy {
 
   @override
   String toString() {
-    return 'Candy(id: $id, name: $name, images: $images, description: $description, price: $price, categoryNumber: $categoryNumber, tag: $tag)';
+    return 'Candy(id: $id, name: $name, images: $images, description: $description, price: $price, categoryID: $categoryID, tag: $tag)';
   }
 
   @override
@@ -82,7 +84,7 @@ class Candy {
         listEquals(other.images, images) &&
         other.description == description &&
         other.price == price &&
-        other.categoryNumber == categoryNumber &&
+        other.categoryID == categoryID &&
         other.tag == tag;
   }
 
@@ -93,7 +95,7 @@ class Candy {
         images.hashCode ^
         description.hashCode ^
         price.hashCode ^
-        categoryNumber.hashCode ^
+        categoryID.hashCode ^
         tag.hashCode;
   }
 }

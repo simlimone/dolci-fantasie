@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/candy.dart';
+import 'package:pasticceria/models/category.dart';
 
 class CandiesController extends GetxController {
   static final to = Get.find<CandiesController>();
@@ -33,12 +34,8 @@ class CandiesController extends GetxController {
   }
 
   Future<List<Candy>> getCandies() async {
-    var collection = await Strings.candyCollection.get();
-    List<Candy> returnList = [];
-
-    returnList.addAll(collection.docs.map((e) => Candy.fromMap(e.data())));
-
-    return returnList;
+    var collection = await Strings.candyCollectionGroup.get();
+    return collection.docs.map((e) => Candy.fromMap(e.data())).toList();
   }
 
   Future<void> createNewCandy() async {
@@ -68,11 +65,31 @@ class CandiesController extends GetxController {
 
     var choosenName = await setCandyName(null);
 
-    if (choosenImages != null && choosenName != null) {
-      var doc = Strings.candyCollection.doc();
+    await Fluttertoast.cancel();
+    Fluttertoast.showToast(
+      msg: "Scegli la categoria",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
 
-      Candy newCandy =
-          Candy(id: doc.id, images: choosenImages, name: choosenName);
+    var choosenCategory = await returnCandyCategory(null);
+
+    if (choosenImages != null &&
+        choosenName != null &&
+        choosenName.isNotEmpty &&
+        choosenCategory != null) {
+      var doc = Strings.candyInCategoryCollection(choosenCategory.id).doc();
+
+      Candy newCandy = Candy(
+        id: doc.id,
+        images: choosenImages,
+        name: choosenName,
+        categoryID: choosenCategory.id,
+      );
 
       await doc.set(newCandy.toMap());
 
@@ -89,10 +106,12 @@ class CandiesController extends GetxController {
 
     List<String?> imageUrls = await uploadImageOnStorage(images);
 
-    if (candy != null) {
+    if (candy != null && candy.categoryID != null) {
       Candy newCandy = candy.copyWith(images: imageUrls);
 
-      await Strings.candyCollection.doc(newCandy.id).update(newCandy.toMap());
+      await Strings.candyInCategoryCollection(candy.categoryID!)
+          .doc(newCandy.id)
+          .update(newCandy.toMap());
 
       initialSetup();
     }
@@ -124,15 +143,61 @@ class CandiesController extends GetxController {
       return null;
     }
 
-    if (candy != null) {
+    if (candy != null && candy.categoryID != null) {
       Candy newCandy = candy.copyWith(name: newName);
 
-      await Strings.candyCollection.doc(newCandy.id).update(newCandy.toMap());
+      await Strings.candyInCategoryCollection(candy.categoryID!)
+          .doc(newCandy.id)
+          .update(newCandy.toMap());
 
       initialSetup();
     }
 
     return newName;
+  }
+
+  Future<List<Category>> getCategories() async {
+    var doc = await Strings.categoriesCollection.get();
+
+    return doc.docs.map((e) => Category.fromMap(e.data())).toList();
+  }
+
+  Future<Category?> returnCandyCategory(Candy? candy) async {
+    List<Category> categories = await getCategories();
+    Rxn<Category> newCategory = Rxn<Category>();
+
+    var dialog = await Get.dialog(AlertDialog(
+      title: const Text("Scegli Categoria"),
+      content: Obx(
+        () => DropdownButton<Category>(
+          items: categories
+              .map((e) => DropdownMenuItem(
+                    value: e,
+                    enabled: e.name != null,
+                    child: Text(e.name ?? 'Disabilitata'),
+                  ))
+              .toList(),
+          value: newCategory.value,
+          onChanged: (value) => newCategory.value = value,
+        ),
+      ),
+      actions: [
+        TextButton(
+          child: const Text("OK"),
+          onPressed: () => Get.back(result: true),
+        ),
+        TextButton(
+          child: const Text("ANNULLA"),
+          onPressed: () => Get.back(result: false),
+        ),
+      ],
+    ));
+
+    if (dialog == null || !dialog) {
+      return null;
+    }
+
+    return newCategory.value;
   }
 
   Future<List<String?>> uploadImageOnStorage(List<XFile> images) async {
@@ -154,7 +219,9 @@ class CandiesController extends GetxController {
   }
 
   Future<void> deleteCandy(Candy candy) async {
-    await Strings.candyCollection.doc(candy.id).delete();
+    await Strings.candyInCategoryCollection(candy.categoryID)
+        .doc(candy.id)
+        .delete();
 
     initialSetup();
   }

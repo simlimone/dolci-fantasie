@@ -3,14 +3,20 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class Strings {
-  static final categoriesDocument = settingsCollection.doc('categories');
   static final aboutDocument = settingsCollection.doc('about-us');
   static final linksDocument = settingsCollection.doc('links');
 
   static final settingsCollection =
       FirebaseFirestore.instance.collection('settings');
   static final usersCollection = FirebaseFirestore.instance.collection('users');
-  static final candyCollection = FirebaseFirestore.instance.collection('candy');
+  static final categoriesCollection =
+      FirebaseFirestore.instance.collection('categories');
+  static final candyCollectionGroup =
+      FirebaseFirestore.instance.collectionGroup('candy');
+
+  static CollectionReference<Map<String, dynamic>> candyInCategoryCollection(
+          String? catID) =>
+      categoriesCollection.doc(catID).collection('candy');
 
   // Firebase Storage
   static final categoriesFolder =

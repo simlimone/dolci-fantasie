@@ -52,7 +52,9 @@ class EditCandyDetailController extends GetxController {
   void onReady() async {
     categories.value = await getCategories();
 
-    selectedCategory.value = categories[candy.value?.categoryNumber ?? 0];
+    selectedCategory.value = categories.firstWhereOrNull(
+      (element) => element.id == candy.value?.categoryID,
+    );
 
     super.onReady();
   }
@@ -73,7 +75,9 @@ class EditCandyDetailController extends GetxController {
 
     Candy newCandy = candy.copyWith(images: tempCandy.images);
 
-    await Strings.candyCollection.doc(candy.id).update(newCandy.toMap());
+    await Strings.candyInCategoryCollection(candy.categoryID)
+        .doc(candy.id)
+        .update(newCandy.toMap());
     Get.back(closeOverlays: true);
   }
 
@@ -87,7 +91,7 @@ class EditCandyDetailController extends GetxController {
     List<String?> imageUrls = await uploadImageOnStorage(images);
 
     if (imageUrls.isNotEmpty) {
-      await Strings.candyCollection
+      await Strings.candyInCategoryCollection(candy.categoryID)
           .doc(candy.id)
           .update({'images': FieldValue.arrayUnion(imageUrls)});
       Get.back(closeOverlays: true);
@@ -103,10 +107,21 @@ class EditCandyDetailController extends GetxController {
       name: candyNameController?.text.trim(),
       description: candyDescriptionController?.text.trim(),
       price: candyPriceController?.text.trim(),
-      categoryNumber: selectedCategory.value?.categoryNumber,
+      categoryID: selectedCategory.value?.id,
     );
 
-    await Strings.candyCollection.doc(candy.id).update(newCandy.toMap());
+    if (selectedCategory.value?.id != candy.categoryID) {
+      await Strings.candyInCategoryCollection(candy.categoryID)
+          .doc(candy.id)
+          .delete();
+    }
+
+    await Strings.candyInCategoryCollection(selectedCategory.value?.id)
+        .doc(candy.id)
+        .set(
+          newCandy.toMap(),
+          SetOptions(merge: true),
+        );
     Get.back(closeOverlays: true);
   }
 
@@ -126,21 +141,8 @@ class EditCandyDetailController extends GetxController {
   }
 
   Future<List<Category>> getCategories() async {
-    var doc = await Strings.categoriesDocument.get();
-    List<Category> returnList = [];
-
-    for (var name in doc.data()?['list']) {
-      List<dynamic> namesList = doc.data()?['list'];
-      int index = namesList.indexOf(name);
-
-      returnList.add(Category(
-        name: name,
-        image: doc.data()?['images'][index],
-        categoryNumber: index,
-      ));
-    }
-
-    return returnList;
+    var doc = await Strings.categoriesCollection.get();
+    return doc.docs.map((e) => Category.fromMap(e.data())).toList();
   }
 
   Future<List<String?>> uploadImageOnStorage(List<XFile> images) async {

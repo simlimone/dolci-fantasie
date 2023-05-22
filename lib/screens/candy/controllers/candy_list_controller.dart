@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/models/candy.dart';
+import 'package:pasticceria/models/category.dart';
 
 class CandyListController extends GetxController {
   static final to = Get.find<CandyListController>();
@@ -29,21 +30,10 @@ class CandyListController extends GetxController {
     update();
   }
 
-  Future<List<Candy>> getCandyByCategory(String category) async {
-    List<Candy> returnList = [];
+  Future<List<Candy>> getCandyByCategory(Category category) async {
+    var doc = await Strings.candyInCategoryCollection(category.id).get();
 
-    var categories = await Strings.categoriesDocument.get();
-    int categoryNumber =
-        (categories.get('list') as List<dynamic>).indexOf(category);
-
-    var docsFoundByCategory = await Strings.candyCollection
-        .where('categoryNumber', isEqualTo: categoryNumber)
-        .get();
-
-    returnList
-        .addAll(docsFoundByCategory.docs.map((e) => Candy.fromMap(e.data())));
-
-    return returnList;
+    return doc.docs.map((e) => Candy.fromMap(e.data())).toList();
   }
 
   Future<List<Candy>> getCandyBySearch(String search) async {
