@@ -25,12 +25,18 @@ class CandiesPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: GetBuilder<CandiesController>(
-          builder: (controller) => ListView.builder(
+          builder: (controller) => GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: Get.size.height / 4,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
             itemCount: controller.candies.length,
             scrollDirection: Axis.vertical,
-            itemExtent: 150,
             itemBuilder: (context, index) {
               Candy candy = controller.candies[index];
+              bool even = index.floor().isEven;
 
               if (candy.name == null || candy.images == null) {
                 return const SizedBox(height: 0, width: 0);
@@ -56,7 +62,7 @@ class CandiesPage extends StatelessWidget {
                 },
                 child: CandyWidget(
                   candy: candy,
-                  even: false,
+                  even: even,
                   editMode: true,
                 ),
               );

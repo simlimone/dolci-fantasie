@@ -38,6 +38,12 @@ class TextStyles {
     fontWeight: FontWeight.bold,
   );
 
+  static const candyPrice = TextStyle(
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
+  );
+
   static const candyDetailTitle = TextStyle(
     fontSize: 30,
     color: Colors.white,

@@ -48,7 +48,7 @@ class EditCandyDetailPage extends GetView<EditCandyDetailController> {
                 Icons.save_outlined,
                 size: 20,
               ),
-              onPressed: () => Get.back(),
+              onPressed: () async => await controller.saveUpdates(candy),
             ),
           ),
         ],

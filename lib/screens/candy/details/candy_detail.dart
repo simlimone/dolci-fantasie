@@ -93,7 +93,7 @@ class CandyDetailPage extends StatelessWidget {
                 ),
                 Text(
                   candy.price ?? '',
-                  style: TextStyles.candyDescriptionLabel,
+                  style: TextStyles.candyPrice,
                 ),
               ],
             ),

@@ -96,7 +96,8 @@ class AboutUsPage extends StatelessWidget {
                   )
                 : Padding(
                     padding: BestPaddings.candyDescription,
-                    child: Text(controller.about.value!.description!),
+                    child: Text(controller.about.value?.description ??
+                        'Caricamento...'),
                   ),
             if (controller.firebaseUser.value != null)
               Padding(

@@ -24,8 +24,7 @@ class CategoryWidget extends GetView<CategoriesController> {
         onTap: editMode
             ? null
             : () {
-                Get.toNamed('/candy-list',
-                    arguments: {'category': category.name});
+                Get.toNamed('/candy-list', arguments: {'category': category});
               },
         child: Container(
           margin: BestPaddings.categoryContainer,

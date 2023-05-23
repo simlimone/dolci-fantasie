@@ -72,7 +72,7 @@ class CandyWidget extends StatelessWidget {
               padding: BestPaddings.candyContainerInt,
               child: Text(
                 candy.price ?? '',
-                style: TextStyles.candyListLabel,
+                style: TextStyles.candyPrice,
               ),
             ),
           ],

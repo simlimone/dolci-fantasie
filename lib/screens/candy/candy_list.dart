@@ -13,7 +13,7 @@ class CandyListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          Get.arguments?['category'] ?? 'Riavvia l\'app',
+          Get.arguments?['category'].name ?? 'Riavvia l\'app',
           style: TextStyles.candyListTitle,
         ),
       ),
