@@ -24,59 +24,65 @@ class CandyWidget extends StatelessWidget {
     String tag = (candy.images?.first ?? StaticImages.defaultCandy) +
         Random().nextInt(1000).toString();
 
-    return Container(
-      height: 300,
-      margin: even
-          ? BestPaddings.candyContainerExt(left: true)
-          : BestPaddings.candyContainerExt(right: true),
-      child: InkWell(
-        borderRadius: DefaultBorders.candyContainer,
-        onTap: () => editMode
-            ? Get.toNamed(
-                '/edit-candy-detail',
-                arguments: candy.copyWith(tag: tag),
-              )
-            : Get.toNamed(
-                '/candy-detail',
-                arguments: candy.copyWith(tag: tag),
-              ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: Hero(
-                tag: tag,
-                child: Material(
-                  elevation: 4,
-                  borderRadius: DefaultBorders.candyContainer,
-                  child: ClipRRect(
-                    borderRadius: DefaultBorders.candyContainer,
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          candy.images?.first ?? StaticImages.defaultCandy,
-                      fit: BoxFit.cover,
-                    ),
+    return InkWell(
+      borderRadius: DefaultBorders.candyContainer,
+      onTap: () => editMode
+          ? Get.toNamed(
+              '/edit-candy-detail',
+              arguments: candy.copyWith(tag: tag),
+            )
+          : Get.toNamed(
+              '/candy-detail',
+              arguments: candy.copyWith(tag: tag),
+            ),
+      child: Stack(
+        children: [
+          Hero(
+            tag: tag,
+            child: Container(
+              height: Get.size.width / 2.3,
+              margin: even
+                  ? BestPaddings.candyContainerExt(left: true)
+                  : BestPaddings.candyContainerExt(right: true),
+              decoration: BoxDecoration(
+                borderRadius: DefaultBorders.candyContainer,
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(
+                    candy.images?.first ?? StaticImages.defaultCandy,
                   ),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Padding(
+          ),
+          Positioned(
+            top: 10,
+            right: -5,
+            child: Container(
+              padding: BestPaddings.candyPriceLabel,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: DefaultBorders.candyPrice,
+              ),
+              margin: BestPaddings.candyContainerInt,
+              child: Text(
+                candy.price ?? '',
+                textAlign: TextAlign.end,
+                style: TextStyles.candyPrice,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
               padding: BestPaddings.candyContainerInt,
               child: Text(
                 candy.name ?? 'Disabilitato',
                 style: TextStyles.candyListLabel,
               ),
             ),
-            Padding(
-              padding: BestPaddings.candyContainerInt,
-              child: Text(
-                candy.price ?? '',
-                style: TextStyles.candyPrice,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

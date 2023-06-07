@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +13,6 @@ class CandyDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Candy candy = Get.arguments;
-
-    CarouselController carouselController = CarouselController();
 
     return Scaffold(
       appBar: AppBar(
@@ -40,62 +37,26 @@ class CandyDetailPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Hero(
-            tag: candy.tag ?? '',
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: ClipRRect(
-                    borderRadius: DefaultBorders.candySheet,
-                    child: CarouselSlider(
-                      carouselController: carouselController,
-                      items: candy.images
-                          ?.map(
-                            (e) => e != null
-                                ? CachedNetworkImage(
-                                    imageUrl: e,
-                                    fit: BoxFit.cover,
-                                  )
-                                : const Icon(Icons.error),
-                          )
-                          .toList(),
-                      options: CarouselOptions(
-                        height: Get.size.height / 2,
-                        viewportFraction: 1,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                    ),
-                  ),
-                ),
-                const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 15.0),
-                    child: Text(
-                      "Scorri per vedere le altre immagini",
-                      style: TextStyles.candyHint,
-                    ),
-                  ),
-                )
-              ],
-            ),
+          SizedBox(
+            height: Get.size.height / 3,
+            child: Hero(
+                tag: candy.tag ?? '',
+                child: CachedNetworkImage(
+                  imageUrl: candy.images?.first ?? '',
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  fit: BoxFit.cover,
+                )),
+          ),
+          const Divider(
+            color: DefaultColors.primaryColor,
+            thickness: 10,
+            height: 10,
           ),
           Padding(
             padding: BestPaddings.candyDescriptionLabel,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Descrizione",
-                  style: TextStyles.candyDescriptionLabel,
-                ),
-                Text(
-                  candy.price ?? '',
-                  style: TextStyles.candyPrice,
-                ),
-              ],
+            child: Text(
+              candy.name ?? '',
+              style: TextStyles.candyDetailName,
             ),
           ),
           Padding(
@@ -103,6 +64,18 @@ class CandyDetailPage extends StatelessWidget {
             child: Text(
               candy.description ?? 'Nessuna descrizione',
               style: TextStyles.candyDescription,
+            ),
+          ),
+          Container(
+            margin: BestPaddings.candyDescription,
+            padding: BestPaddings.allergeniInside,
+            decoration: BoxDecoration(
+              borderRadius: DefaultBorders.allergeniContainer,
+              color: DefaultColors.secondaryColor,
+            ),
+            child: const Text(
+              "CONTATTACI PER INFO SUGLI ALLERGENI",
+              style: TextStyles.allergeni,
             ),
           ),
         ],

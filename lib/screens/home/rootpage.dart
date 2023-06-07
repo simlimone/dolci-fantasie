@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pasticceria/screens/home/pages/categories_screen.dart';
 import 'package:pasticceria/screens/home/pages/home_screen.dart';
 import 'package:pasticceria/screens/home/pages/more_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -13,8 +14,7 @@ class RootPage extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: false,
-      backgroundColor:
-          const Color.fromARGB(255, 25, 22, 29), // Default is Colors.white.
+      backgroundColor: const Color(0xffc99d66), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -22,11 +22,7 @@ class RootPage extends StatelessWidget {
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: const NavBarDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10),
-        ),
-        colorBehindNavBar: Color(0xff1F1B24),
+        colorBehindNavBar: Color(0xffc99d66),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
@@ -49,6 +45,7 @@ class RootPage extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
+      const CategoriesScreen(),
       const MoreScreen(),
     ];
   }
@@ -59,13 +56,19 @@ class RootPage extends StatelessWidget {
         icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
         activeColorPrimary: CupertinoColors.white,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: CupertinoColors.white,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.list_dash),
+        title: ("Prodotti"),
+        activeColorPrimary: CupertinoColors.white,
+        inactiveColorPrimary: CupertinoColors.white,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.ellipsis_circle),
         title: ("Altro"),
         activeColorPrimary: CupertinoColors.white,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: CupertinoColors.white,
       ),
     ];
   }

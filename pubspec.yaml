@@ -39,10 +39,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.1
+  fluttertoast: ^8.2.1
+  font_awesome_flutter: ^10.4.0
   get: ^4.6.5
   image_picker: ^0.8.7+4
   persistent_bottom_nav_bar: ^5.0.2
-  fluttertoast: ^8.2.1
+  url_launcher: ^6.1.11
   webview_flutter: ^4.2.0
 
 dev_dependencies:

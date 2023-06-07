@@ -19,11 +19,11 @@ class CandyListPage extends StatelessWidget {
       ),
       body: GetBuilder<CandyListController>(
         builder: (controller) => GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
-            mainAxisExtent: 300,
+            mainAxisExtent: Get.size.width / 2.3,
           ),
           scrollDirection: Axis.vertical,
           itemCount: controller.candyList.length,

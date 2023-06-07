@@ -27,22 +27,17 @@ class CategoryWidget extends GetView<CategoriesController> {
                 Get.toNamed('/candy-list', arguments: {'category': category});
               },
         child: Container(
-          margin: BestPaddings.categoryContainer,
           padding: BestPaddings.categoryContainerInt,
-          decoration: BoxDecoration(
-            borderRadius: DefaultBorders.categoryContainer,
+          decoration: const BoxDecoration(
             color: Colors.white10,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: Stack(
             children: [
               ClipRRect(
-                borderRadius: DefaultBorders.categoryImage,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     Colors.black
-                        .withOpacity(0.6), // 0 = Colored, 1 = Black & White
+                        .withOpacity(0.4), // 0 = Colored, 1 = Black & White
                     BlendMode.darken,
                   ),
                   child: Stack(
@@ -50,7 +45,6 @@ class CategoryWidget extends GetView<CategoriesController> {
                     children: [
                       Container(
                         height: 150,
-                        width: Get.size.width / 3,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
@@ -69,20 +63,25 @@ class CategoryWidget extends GetView<CategoriesController> {
                   ),
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: InkWell(
-                  onTap: editMode
-                      ? () async => await controller.setCategoryName(category)
-                      : null,
-                  child: Text(
-                    category.name ?? 'Disabilitato',
-                    textAlign: TextAlign.left,
-                    style: TextStyles.categoryLabel,
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 30.0,
+                    bottom: 10,
+                  ),
+                  child: InkWell(
+                    onTap: editMode
+                        ? () async => await controller.setCategoryName(category)
+                        : null,
+                    child: Text(
+                      category.name ?? 'Disabilitato',
+                      textAlign: TextAlign.left,
+                      style: TextStyles.categoryLabel,
+                    ),
                   ),
                 ),
               ),
-              if (!editMode) const Icon(Icons.arrow_forward_ios_outlined),
             ],
           ),
         ),

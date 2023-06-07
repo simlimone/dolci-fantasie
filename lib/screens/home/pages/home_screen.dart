@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pasticceria/screens/home/controllers/home_controller.dart';
-import 'package:pasticceria/widgets/category_widget.dart';
+import 'package:pasticceria/constants/constants.dart';
+import 'package:pasticceria/screens/home/controllers/links_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,32 +8,74 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/logo/fantasie-256.png',
-          color: Colors.white,
-          height: 100,
-        ),
-      ),
-      body: SafeArea(
-        child: GetBuilder<HomeController>(
-          builder: (controller) => ListView.builder(
-            itemCount: controller.categories.length,
-            scrollDirection: Axis.vertical,
-            itemExtent: 150,
-            itemBuilder: (context, index) {
-              var category = controller.categories[index];
-
-              if (category.name == null || category.image == null) {
-                return const SizedBox(height: 0, width: 0);
-              }
-
-              return CategoryWidget(
-                category: category,
-              );
-            },
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            color: Colors.grey,
           ),
-        ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _buildWebPhoneEmail(),
+              Image.asset(
+                "assets/logo/fantasie-512-white.png",
+                color: Colors.white,
+                height: 250,
+              ),
+              const Text(
+                "BENVENUTI\nIN UN MONDO\nDI BONTÀ",
+                textAlign: TextAlign.center,
+                style: TextStyles.homeSubtitle,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  _buildWebPhoneEmail() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 50.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () async => await LinksController.to.openWebsite(),
+            child: const Padding(
+              padding: BestPaddings.moreRightOnly,
+              child: Icon(
+                Icons.language_outlined,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async => await LinksController.to.openPhone(),
+            child: const Padding(
+              padding: BestPaddings.moreRightOnly,
+              child: Icon(
+                Icons.phone,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async => await LinksController.to.openEmail(),
+            child: const Padding(
+              padding: BestPaddings.moreRightOnly,
+              child: Icon(
+                Icons.email_outlined,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

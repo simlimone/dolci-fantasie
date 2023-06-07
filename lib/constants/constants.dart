@@ -31,6 +31,11 @@ class TextStyles {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+  static const appBarTitle = TextStyle(
+    fontSize: 20,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
+  );
 
   static const candyListLabel = TextStyle(
     fontSize: 20,
@@ -40,13 +45,18 @@ class TextStyles {
 
   static const candyPrice = TextStyle(
     fontSize: 16,
-    color: Colors.white,
+    color: Colors.black87,
     fontWeight: FontWeight.normal,
   );
 
   static const candyDetailTitle = TextStyle(
     fontSize: 30,
     color: Colors.white,
+    fontWeight: FontWeight.bold,
+  );
+  static const candyDetailName = TextStyle(
+    fontSize: 20,
+    color: DefaultColors.primaryColor,
     fontWeight: FontWeight.bold,
   );
 
@@ -57,9 +67,14 @@ class TextStyles {
   );
 
   static const candyDescription = TextStyle(
-    fontSize: 20,
-    color: Colors.white,
+    fontSize: 18,
+    color: Colors.black87,
     fontWeight: FontWeight.normal,
+  );
+  static const allergeni = TextStyle(
+    fontSize: 14,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
   );
   static const candyHint = TextStyle(
     fontSize: 14,
@@ -72,11 +87,34 @@ class TextStyles {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+
+  static const morePrimaryTitle = TextStyle(
+    fontSize: 20,
+    color: DefaultColors.primaryColor,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const moreSecondaryTitle = TextStyle(
+    fontSize: 20,
+    color: DefaultColors.dividerColor,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const homeSubtitle = TextStyle(
+    fontSize: 18,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
+  );
 }
 
 class DefaultBorders {
-  static final candyContainer = BorderRadius.circular(35);
+  static const candyContainer = BorderRadius.only(
+    topLeft: Radius.circular(18),
+    topRight: Radius.circular(18),
+  );
   static final categoryContainer = BorderRadius.circular(8);
+  static final allergeniContainer = BorderRadius.circular(10);
+  static final candyPrice = BorderRadius.circular(4);
   static const categoryImage = BorderRadius.only(
     topLeft: Radius.circular(8),
     bottomLeft: Radius.circular(8),
@@ -94,30 +132,31 @@ class BestPaddings {
     horizontal: 15,
     vertical: 5,
   );
-  static const categoryContainerInt = EdgeInsets.only(right: 5);
+  static const categoryContainerInt = EdgeInsets.only(right: 0);
   static const backButton = EdgeInsets.all(6);
   static candyContainerExt({bool right = false, bool left = false}) =>
       EdgeInsets.only(
-        left: left ? 15 : 5,
-        right: right ? 15 : 5,
+        left: left ? 15 : 10,
+        right: right ? 15 : 10,
         top: 5,
         bottom: 5,
       );
   static const candyContainerInt = EdgeInsets.only(
-    left: 15,
+    left: 20,
     top: 5,
-    bottom: 5,
+    bottom: 15,
     right: 5,
   );
   static const candyDescription = EdgeInsets.only(
-    left: 25,
-    right: 25,
+    left: 50,
+    right: 50,
     bottom: 20,
+    top: 5,
   );
   static const candyDescriptionLabel = EdgeInsets.only(
-    left: 25,
-    right: 25,
-    top: 30,
+    left: 50,
+    right: 50,
+    top: 50,
     bottom: 15,
   );
   static const candyTitleLabel = EdgeInsets.only(
@@ -126,9 +165,25 @@ class BestPaddings {
     top: 0,
     bottom: 15,
   );
+  static const candyPriceLabel = EdgeInsets.symmetric(
+    horizontal: 10,
+    vertical: 1,
+  );
+
+  static const moreRightOnly = EdgeInsets.only(right: 20);
+  static const moreRightOnlySocials = EdgeInsets.only(right: 22);
+  static const allergeniInside = EdgeInsets.all(8.0);
 }
 
 class StaticImages {
   static const String defaultCandy =
       "https://www.planetcandy.ie/image/cache/catalog/Placeholders/chocolate-sweets-placeholder-300x300.jpg";
+}
+
+class DefaultColors {
+  static const Color primaryColor = Color(0xffc99d66);
+
+  static const Color secondaryColor = Color(0xff422918);
+
+  static const Color dividerColor = Color(0xffa3897a);
 }
