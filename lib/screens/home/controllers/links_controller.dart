@@ -86,7 +86,7 @@ class LinksController extends GetxController {
   }
 
   Future<void> _launchUrl(Uri uri) async {
-    if (!await launchUrl(uri)) {
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $uri');
     }
   }

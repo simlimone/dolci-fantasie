@@ -56,6 +56,8 @@ class CategoryWidget extends GetView<CategoriesController> {
                       if (editMode)
                         IconButton(
                           icon: const Icon(Icons.change_circle),
+                          iconSize: 50,
+                          color: Colors.white,
                           onPressed: () async =>
                               await controller.setCategoryPicture(category),
                         ),

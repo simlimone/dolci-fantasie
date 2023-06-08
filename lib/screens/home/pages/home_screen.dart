@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/screens/home/controllers/links_controller.dart';
 
@@ -11,8 +12,16 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
-            color: Colors.grey,
+          ColorFiltered(
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(.5),
+              BlendMode.darken,
+            ),
+            child: Image.asset(
+              "assets/backgrounds/1.jpg",
+              fit: BoxFit.cover,
+              height: Get.size.height,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

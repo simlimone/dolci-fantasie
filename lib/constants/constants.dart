@@ -62,7 +62,7 @@ class TextStyles {
 
   static const candyDescriptionLabel = TextStyle(
     fontSize: 21,
-    color: Colors.white,
+    color: Colors.black87,
     fontWeight: FontWeight.bold,
   );
 

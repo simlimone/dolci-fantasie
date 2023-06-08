@@ -26,7 +26,7 @@ class EditCandyDetailPage extends GetView<EditCandyDetailController> {
             shape: const CircleBorder(),
             padding: BestPaddings.backButton,
             textColor: Colors.black87,
-            color: Colors.white,
+            color: DefaultColors.primaryColor,
             child: const Icon(
               Icons.arrow_back_ios_new_outlined,
               size: 16,
@@ -42,8 +42,8 @@ class EditCandyDetailPage extends GetView<EditCandyDetailController> {
             child: MaterialButton(
               shape: const CircleBorder(),
               padding: BestPaddings.backButton,
-              textColor: Colors.green,
-              color: Colors.white,
+              textColor: DefaultColors.secondaryColor,
+              color: DefaultColors.primaryColor,
               child: const Icon(
                 Icons.save_outlined,
                 size: 20,
@@ -186,20 +186,11 @@ class EditCandyDetailPage extends GetView<EditCandyDetailController> {
               style: TextStyles.candyDescription,
             ),
           ),
-          Padding(
+          const Padding(
             padding: BestPaddings.candyDescriptionLabel,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Descrizione",
-                  style: TextStyles.candyDescriptionLabel,
-                ),
-                Text(
-                  candy.price ?? '',
-                  style: TextStyles.candyDescriptionLabel,
-                ),
-              ],
+            child: Text(
+              "Descrizione",
+              style: TextStyles.candyDescriptionLabel,
             ),
           ),
           Padding(

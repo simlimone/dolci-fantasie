@@ -57,18 +57,24 @@ class CandyWidget extends StatelessWidget {
           ),
           Positioned(
             top: 10,
-            right: -5,
-            child: Container(
-              padding: BestPaddings.candyPriceLabel,
-              decoration: BoxDecoration(
-                color: Colors.white,
+            right: 0,
+            child: Padding(
+              padding: BestPaddings.candyContainerInt,
+              child: Material(
                 borderRadius: DefaultBorders.candyPrice,
-              ),
-              margin: BestPaddings.candyContainerInt,
-              child: Text(
-                candy.price ?? '',
-                textAlign: TextAlign.end,
-                style: TextStyles.candyPrice,
+                elevation: 5,
+                child: Container(
+                  padding: BestPaddings.candyPriceLabel,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: DefaultBorders.candyPrice,
+                  ),
+                  child: Text(
+                    candy.price ?? '',
+                    textAlign: TextAlign.end,
+                    style: TextStyles.candyPrice,
+                  ),
+                ),
               ),
             ),
           ),

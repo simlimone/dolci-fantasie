@@ -25,6 +25,11 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
+        <!-- This activity handles "SEND" actions with text data -->
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="mailto"/>
+        </intent>
         <!--#docregion android-queries-->
     </queries>
     <!--#enddocregion android-queries-->
