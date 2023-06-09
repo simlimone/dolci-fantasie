@@ -14,7 +14,7 @@ class CandyListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           Get.arguments?['category'].name ?? 'Riavvia l\'app',
-          style: TextStyles.candyListTitle,
+          style: TextStyles.appBarTitle,
         ),
       ),
       body: GetBuilder<CandyListController>(

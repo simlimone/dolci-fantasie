@@ -27,26 +27,26 @@ class Strings {
 
 class TextStyles {
   static const categoryLabel = TextStyle(
-    fontSize: 25,
+    fontSize: 20,
     color: Colors.white,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
   );
   static const appBarTitle = TextStyle(
     fontSize: 20,
     color: Colors.white,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
   );
 
   static const candyListLabel = TextStyle(
-    fontSize: 20,
+    fontSize: 16,
     color: Colors.white,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
   );
 
   static const candyPrice = TextStyle(
-    fontSize: 16,
-    color: Colors.black87,
-    fontWeight: FontWeight.normal,
+    fontSize: 14,
+    color: DefaultColors.secondaryColor,
+    fontWeight: FontWeight.w500,
   );
 
   static const candyDetailTitle = TextStyle(
@@ -69,7 +69,7 @@ class TextStyles {
   static const candyDescription = TextStyle(
     fontSize: 18,
     color: Colors.black87,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
   );
   static const allergeni = TextStyle(
     fontSize: 14,
@@ -103,7 +103,9 @@ class TextStyles {
   static const homeSubtitle = TextStyle(
     fontSize: 18,
     color: Colors.white,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
+    letterSpacing: 2.5,
+    wordSpacing: 2.5,
   );
 }
 
@@ -167,7 +169,7 @@ class BestPaddings {
   );
   static const candyPriceLabel = EdgeInsets.symmetric(
     horizontal: 10,
-    vertical: 1,
+    vertical: 4,
   );
 
   static const moreRightOnly = EdgeInsets.only(right: 20);

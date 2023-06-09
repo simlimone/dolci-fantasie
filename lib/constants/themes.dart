@@ -3,6 +3,7 @@ import 'package:pasticceria/constants/constants.dart';
 
 class AppThemes {
   static final darkTheme = ThemeData(
+    fontFamily: 'Gotham',
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
       primary: DefaultColors.primaryColor,

@@ -97,6 +97,16 @@ flutter:
     - family: SocialIcons
       fonts:
         - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/GOTHAM-MEDIUM.ttf
+          weight: 500
+        - asset: assets/fonts/GOTHAM-THIN.ttf
+          weight: 100
+        - asset: assets/fonts/GOTHAM-LIGHT.ttf
+          weight: 300
+        - asset: assets/fonts/GOTHAM-BOLD.ttf
+          weight: 700
     # fonts:
     #   - family: Schyler
     #     fonts:

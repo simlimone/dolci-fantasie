@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pasticceria/constants/constants.dart';
 import 'package:pasticceria/screens/home/controllers/home_controller.dart';
 import 'package:pasticceria/widgets/category_widget.dart';
 
@@ -9,7 +10,12 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("PRODOTTI")),
+      appBar: AppBar(
+        title: const Text(
+          "PRODOTTI",
+          style: TextStyles.appBarTitle,
+        ),
+      ),
       body: SafeArea(
         child: GetBuilder<HomeController>(
           builder: (controller) => ListView.builder(
